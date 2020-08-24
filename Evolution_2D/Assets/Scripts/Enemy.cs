@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -9,16 +10,16 @@ public class Enemy : MonoBehaviour
     public float hpEnemy = 5;
     public float damageEnemy = 5f;
     public float expEnemy = 10f;
+    public float goldEnemy = 5f;
     [Header("Движение")]
     public float speed = 3f;
     public float timerEnemy = 10f;
     public float waitTimerEnemy = 5f;
     public Vector2 ofssetVec;
     [Header("Знание")]
-    public GameObject player;
+    public GameObject effect;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         waitTimerEnemy = Random.Range(1f, 7f);
     }
 
@@ -27,10 +28,9 @@ public class Enemy : MonoBehaviour
         hpEnemy -= damage;
         if (hpEnemy <= 0)
         {
-            GameController.GOLD += (5*GameController.INCOME);
+            Instantiate(effect, transform.position, Quaternion.identity);
             gameObject.GetComponentInParent<EnemySpawner>().enemyList.Remove(gameObject);
             Destroy(gameObject);
-            player.GetComponent<PlayerController>().AddExp(expEnemy);
         }
     }
     void FixedUpdate()

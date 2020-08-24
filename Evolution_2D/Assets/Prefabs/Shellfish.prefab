@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 66bc3985990bb9144b78f0a2d2e2e0b6, type: 3}
-  m_Color: {r: 0.4245283, g: 0.07008721, b: 0.07008721, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -117,12 +117,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99759b9913d685c4db533454499d8ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 2
-  damage: 5
+  hpEnemy: 5
+  damageEnemy: 5
+  expEnemy: 10
   speed: 2
   timerEnemy: 6
   waitTimerEnemy: 3
   ofssetVec: {x: 0, y: 0}
+  effect: {fileID: 5509889351419200465, guid: d2c497874aa70604da29052b481de6c5, type: 3}
+  player: {fileID: 0}
 --- !u!58 &-8984137280109077611
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -22,10 +22,19 @@ public class PlayerController : MonoBehaviour
     public float damage;
     public float speed = 3f;
 
+    private void Start()
+    {
+        curHpImage.fillAmount = hpCurent / hpMax;
+        hpText.text = hpCurent.ToString() + " / " + hpMax.ToString();
+        damageText.text = "Урон: " + damage.ToString();
+        lvlPlayerText.text = "Уровень:" + lvlPlayer.ToString();
+        curExpImage.fillAmount = expCurent / expMax;
+        expText.text = expCurent.ToString() + " / " + expMax.ToString();
+    }
 
     private void Update()
     {
-        Bar();
+        damageText.text = "Урон: " + damage.ToString();
     }
     private void FixedUpdate()
     {
@@ -39,7 +48,8 @@ public class PlayerController : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             TakeDamage(enemy.damageEnemy);
             enemy.TakeDamageEnemy(damage);
-
+            GameController.GOLD += (enemy.goldEnemy * GameController.INCOME);
+            AddExp(enemy.expEnemy);
         }
     }
 
@@ -68,6 +78,18 @@ public class PlayerController : MonoBehaviour
         curHpImage.fillAmount = hpCurent/hpMax;
         hpText.text = hpCurent.ToString() + " / " + hpMax.ToString();
     }
+    public void AddHp(float hp)
+    {
+        if(hpCurent!=hpMax)
+        hpCurent += hp;
+        else
+        {
+            Debug.Log("MaxHp");
+        }
+        curHpImage.fillAmount = hpCurent / hpMax;
+        hpText.text = hpCurent.ToString() + " / " + hpMax.ToString();
+
+    }
     public void AddExp(float exp)
     {
         expCurent += exp;
@@ -81,9 +103,5 @@ public class PlayerController : MonoBehaviour
         curExpImage.fillAmount = expCurent/expMax;
         expText.text = expCurent.ToString() + " / " + expMax.ToString();
 
-    }
-    private void Bar()
-    {
-        damageText.text = "Урон: "+damage.ToString();
     }
 }
